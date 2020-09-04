@@ -1,0 +1,33 @@
+package main
+
+import (
+	"github.com/porterdev/ego/pkg/json"
+	"github.com/porterdev/ego/pkg/porter"
+
+    v "github.com/porterdev/ego/internal/value"
+)
+
+// KubernetesConfig is great
+type KubernetesConfig struct {
+	porter.DefaultConfig
+}
+
+// Generate is great
+func (c KubernetesConfig) Generate(input porter.Object) (porter.Object, error) {
+	test1 := v.String("foo")
+	test2 := v.String("bar")
+
+	return <<test
+    {
+        {{test1}}:{{test2}}
+    }
+    test>>
+}
+
+func main() {
+    c := KubernetesConfig{
+        *porter.CreateDefaultConfig("12345", "./", 2),
+	}
+
+    c.Apply(v.String(""))
+}
